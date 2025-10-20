@@ -1,0 +1,385 @@
+/* ==============================================
+   RAWG Games - IMDb Style
+   ============================================== */
+
+/* Variables CSS inspiradas en IMDb */
+:root {
+  --color-imdb-yellow: #f5c518;
+  --color-bg: #0f0f0f;
+  --color-panel: #1a1a1a;
+  --color-card: #141414;
+  --color-text: #e6e6e6;
+  --color-muted: #b3b3b3;
+  --color-danger: #ff5d5d;
+  --color-border: #222;
+  --color-border-light: #333;
+  --color-border-card: #1f1f1f;
+  --color-success: #a5d6a7;
+  --color-success-border: #2e7d32;
+  
+  --container-max-width: 1200px;
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 10px;
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+code {
+  background: var(--color-card);
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm);
+  font-family: 'Courier New', monospace;
+}
+
+/* ==============================================
+   LAYOUT
+   ============================================== */
+
+.app {
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* ==============================================
+   HEADER
+   ============================================== */
+
+.header {
+  background: var(--color-panel);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  width: 28px;
+  height: 28px;
+  background: var(--color-imdb-yellow);
+  border-radius: var(--border-radius-sm);
+}
+
+.header-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.header-search-form {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  max-width: 520px;
+  margin: 0 16px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border-light);
+  background: var(--color-card);
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+.search-input::placeholder {
+  color: var(--color-muted);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-imdb-yellow);
+}
+
+/* ==============================================
+   BUTTONS
+   ============================================== */
+
+.btn {
+  background: transparent;
+  border: 1px solid #444;
+  color: var(--color-text);
+  padding: 8px 12px;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-accent {
+  border-color: var(--color-imdb-yellow);
+  color: var(--color-imdb-yellow);
+}
+
+.btn-accent:hover:not(:disabled) {
+  background: rgba(245, 197, 24, 0.1);
+}
+
+.btn-success {
+  border-color: var(--color-success-border);
+  color: var(--color-success);
+}
+
+.btn-success:hover:not(:disabled) {
+  background: rgba(46, 125, 50, 0.1);
+}
+
+/* ==============================================
+   FILTERS SECTION
+   ============================================== */
+
+.filters-panel {
+  background: var(--color-panel);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.filters-panel p {
+  margin: 0;
+}
+
+/* ==============================================
+   GAME LIST
+   ============================================== */
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* ==============================================
+   GAME CARD
+   ============================================== */
+
+.game-card {
+  background: var(--color-card);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border-card);
+  transition: all 0.3s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border-color: #2a2a2a;
+}
+
+.game-card-image-wrapper {
+  position: relative;
+}
+
+.game-card-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+}
+
+.game-card-score {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--color-imdb-yellow);
+  color: #000;
+  padding: 2px 6px;
+  font-weight: 700;
+  border-radius: var(--border-radius-sm);
+  font-size: 13px;
+}
+
+.game-card-content {
+  padding: 12px;
+}
+
+.game-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 4px 0 6px;
+}
+
+.game-card-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.game-card-text + .game-card-text {
+  margin-top: 6px;
+}
+
+.game-card-details {
+  margin-top: 8px;
+  color: var(--color-text);
+  font-size: 13px;
+}
+
+.game-card-details p {
+  margin: 6px 0;
+}
+
+.game-card-btn {
+  margin-top: 6px;
+}
+
+/* ==============================================
+   PAGINATION
+   ============================================== */
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.pagination span {
+  padding: 0 8px;
+}
+
+/* ==============================================
+   REVIEW FORM
+   ============================================== */
+
+.review-section {
+  margin-top: 8px;
+  padding: 16px;
+  background: var(--color-panel);
+  border-radius: var(--border-radius);
+}
+
+.review-section h2 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.review-form {
+  display: grid;
+  gap: 8px;
+}
+
+.form-input,
+.form-textarea {
+  padding: 10px 12px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border-light);
+  background: #121212;
+  color: var(--color-text);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-muted);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-imdb-yellow);
+}
+
+.form-textarea {
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.status-loading {
+  color: var(--color-muted);
+}
+
+.status-success {
+  color: var(--color-success);
+}
+
+.status-error {
+  color: var(--color-danger);
+}
+
+/* ==============================================
+   FOOTER
+   ============================================== */
+
+.footer {
+  color: #777;
+  padding: 24px 16px;
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* ==============================================
+   LOADING & ERROR STATES
+   ============================================== */
+
+.loading-section,
+.error-section {
+  padding: 24px 16px;
+}
+
+.error-text {
+  color: var(--color-danger);
+}
+
