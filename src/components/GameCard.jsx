@@ -1,22 +1,24 @@
+import useToggle from "../hooks/useToggle";
+
 export default function GameCard({ game }) {
-  const cover =
-    game.background_image ||
-    "https://placehold.co/600x400/171717/aaa?text=No+image";
+  const [details, toggle] = useToggle();
 
   return (
     <article className="game-card">
       <div className="game-card-image-wrapper">
-        <img src={cover} alt={game.name} className="game-card-image" />
+        <img src={game.background_image} alt={game.name} className="game-card-image" />
         <span className="game-card-score">{game.metacritic ?? "—"}</span>
       </div>
       <div className="game-card-content">
         <h3 className="game-card-title">{game.name}</h3>
         <p className="game-card-text">Lanzamiento: {game.released || "—"}</p>
-        <p className="game-card-text">Plataformas: {(game.platforms || [])
-          .map((p) => p.platform.name)
-          .join(", ") || "—"}</p>
-        {open && (
+
+        <button onClick={toggle} className="btn game-card-btn">Ver {details ? "menos" : "más"}</button>
+        {details && (
           <div className="game-card-details">
+            <p className="game-card-text">Plataformas: {(game.platforms || [])
+              .map((p) => p.platform.name)
+              .join(", ") || "—"}</p>
             <p>
               ⭐ Rating: {game.rating} ({game.ratings_count})
             </p>

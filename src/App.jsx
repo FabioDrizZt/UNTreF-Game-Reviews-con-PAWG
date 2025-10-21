@@ -1,26 +1,17 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
 import GameCard from './components/GameCard'
+import Spinner from './components/Spinner'
+import useFetch from './hooks/useFetch'
+
+const API_KEY = import.meta.env.VITE_API_KEY
 
 function App() {
-  const [games, setGames] = useState([])
-  const API_KEY = import.meta.env.VITE_API_KEY
-  useEffect(() => {
-    console.log(API_KEY)
-    fetch(`https://api.rawg.io/api/games?key=${API_KEY}`)
-      .then(res => res.json())
-      .then(data => setGames(data.results))
-  }, [API_KEY])
-
-  /*   useEffect(() => {
-      const fetchData = async () => {
-        const response = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}`)
-        const data = await response.json()
-        setGames(data.results)
-      }
-      fetchData()
-    }, [API_KEY]) */
-
+  const [games, loading, error] = useFetch(`https://api.rawg.io/api/games?key=${API_KEY}`)
+  if (loading) {
+    return <Spinner />
+  }
+  if (error) {
+    return <p>Algo salio mal...</p>
+  }
   return (
     <main>
       <h1>Games</h1>
